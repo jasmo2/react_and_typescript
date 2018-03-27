@@ -3,20 +3,29 @@ import './App.css';
 
 const logo = require('./logo.svg');
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
-    );
+interface IState { // this Interphase prevent any value in the constructor
+  actualTask: string;
+  tasks: Array<ITask>;
+}
+
+interface ITask { // It take cares for what types could be acepted in the Array
+  id: number;
+  value: string;
+  completed: boolean;
+}
+
+class ToDo extends React.Component<{}, IState> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      actualTask: '',
+      tasks:[]
+    }
+  }
+
+  public render(): JSX.Element | null {
+    return null;
   }
 }
 
-export default App;
+export default ToDo;
