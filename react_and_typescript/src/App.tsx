@@ -24,7 +24,21 @@ class ToDo extends React.Component<{}, IState> {
   }
 
   public render(): JSX.Element | null {
-    return null;
+    return (
+      <div>
+        <h1>Typescript with Rect</h1>
+        <h2>To do list</h2>
+        <form >
+          <input
+            type='text'
+            placeholder='New task'
+            value={this.state.actualTask}
+            onChange={e => this.setState({ actualTask: e.target.value })}
+          />
+          <button type="submit">➕ New task</button>
+        </form>
+      </div>
+    );
   }
 }
 
