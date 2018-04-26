@@ -1,8 +1,6 @@
 import * as React from 'react';
 import './App.css';
 
-// const logo = require('./logo.svg');
-
 interface State { // this Interphase prevent any value in the constructor
   actualTask: string;
   tasks: Array<Task>;
@@ -23,12 +21,28 @@ class ToDo extends React.Component<{}, State> {
     };
   }
 
+  public handleTaskSumbit (e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
+    const { tasks, actualTask } = this.state;
+    this.setState({
+      actualTask: '',
+      tasks: [
+        ...tasks,
+        {
+          id: this._setId(),
+          value: actualTask,
+          completed: false
+        }
+      ]
+    });
+  }
+
   public render(): JSX.Element | null {
     return (
       <div>
         <h1>Typescript with Rect</h1>
         <h2>To do list</h2>
-        <form >
+        <form onSubmit={e => this.handleTaskSumbit(e)}>
           <input
             type="text"
             placeholder="New task"
@@ -37,8 +51,24 @@ class ToDo extends React.Component<{}, State> {
           />
           <button type="submit">➕ New task</button>
         </form>
+        <section>{this.renderTasks()}</section>
       </div>
     );
+  }
+
+  private _setId(): number {
+    const date: Date = new Date();
+    return date.getTime();
+  }
+
+  private renderTasks(): JSX.Element[] {
+    return this.state.tasks.map((task: Task, index: number) => {
+      return (
+        <div key={task.id}>
+          {task.value}
+        </div>
+      );
+    });
   }
 }
 
