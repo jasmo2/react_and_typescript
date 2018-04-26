@@ -1,3 +1,4 @@
+// tslint:disable:no-console
 import * as React from 'react';
 import './App.css';
 
@@ -63,12 +64,30 @@ class ToDo extends React.Component<{}, State> {
 
   private renderTasks(): JSX.Element[] {
     return this.state.tasks.map((task: Task, index: number) => {
+      const {id, value} = task;
       return (
-        <div key={task.id}>
-          {task.value}
+        <div key={id}>
+          <span>{value}</span>
+          <button onClick={() => this.archiveTask(index)}>archive</button>
+          <button onClick={() => this.deleteTask(id)}>Delete</button>
         </div>
       );
     });
+  }
+
+  private archiveTask(index: number): void {
+    const task: Task[] = this.state.tasks.splice(index, 1);
+    task[0].completed = !task[0].completed;
+    const tasks: Array<Task> = [...this.state.tasks, ...task];
+    console.log(`task ${task[0].id} has been ${ task[0].completed ? 'archive' : 'unarchive' }.`);
+    this.setState({ tasks });
+  }
+
+  private deleteTask(id: number): void {
+    const tasks: Array<Task> = this.state.tasks.filter(
+      (task: Task) => task.id !== id
+    );
+    this.setState({ tasks });
   }
 }
 

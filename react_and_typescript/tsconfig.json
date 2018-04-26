@@ -25,5 +25,8 @@
     "webpack",
     "jest",
     "src/setupTests.ts"
-  ]
+  ],
+  "rules": {
+    "no-console": false
+  }
 }
