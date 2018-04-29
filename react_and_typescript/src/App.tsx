@@ -40,17 +40,18 @@ class ToDo extends React.Component<{}, State> {
 
   public render(): JSX.Element | null {
     return (
-      <div>
+      <div className="todo">
         <h1>Typescript with Rect</h1>
         <h2>To do list</h2>
         <form onSubmit={e => this.handleTaskSumbit(e)}>
           <input
-            type="text"
-            placeholder="New task"
-            value={this.state.actualTask}
+            className="todo__input"
             onChange={e => this.setState({ actualTask: e.target.value })}
+            placeholder="New task"
+            type="text"
+            value={this.state.actualTask}
           />
-          <button type="submit">➕ New task</button>
+          <button type="submit" className="todo__button">➕ New task</button>
         </form>
         <section>{this.renderTasks()}</section>
       </div>
@@ -64,12 +65,20 @@ class ToDo extends React.Component<{}, State> {
 
   private renderTasks(): JSX.Element[] {
     return this.state.tasks.map((task: Task, index: number) => {
-      const {id, value} = task;
+      const {id, completed, value} = task;
       return (
-        <div key={id}>
-          <span>{value}</span>
-          <button onClick={() => this.archiveTask(index)}>archive</button>
-          <button onClick={() => this.deleteTask(id)}>Delete</button>
+        <div key={id} className="todo__task">
+          <span className={completed ? 'todo--task-is-completed' : ''}>{value}</span>
+          <button
+            className="todo__button"
+            onClick={() => this.archiveTask(index)}
+          >{!completed ? 'Archive' : 'Unarchive'}
+          </button>
+          <button
+            className="todo__button"
+            onClick={() => this.deleteTask(id)}
+          >Delete
+          </button>
         </div>
       );
     });
