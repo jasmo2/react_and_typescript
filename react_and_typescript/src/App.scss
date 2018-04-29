@@ -1,25 +1,38 @@
+$background-grey: #f3f3f3;
+$button-grey: #5e5e5e;
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.3rem;
-  background-color: #f3f3f3; }
+  background-color: $background-grey;
+}
 
 .todo {
-  font-size: 1.3rem; }
-  .todo__button {
+  font-size: 1.3rem;
+
+  &__button {
     height: 2.5rem;
     border: none;
     font-size: 1.3rem;
     border-bottom: 4px solid #ccc;
     margin-left: .5rem;
     cursor: pointer;
-    color: #5e5e5e; }
-  .todo__input {
+    color: $button-grey;
+  }
+
+  &__input {
     padding: .5rem;
     font-size: 1.3rem;
-    margin: 1rem 0; }
-  .todo__task {
-    padding: .5rem; }
-  .todo--task-is-completed {
+    margin: 1rem 0;
+  }
+
+  &__task {
+    padding: .5rem;
+  }
+
+  &--task-is-completed {
     text-decoration: line-through;
-    color: #5e5e5e; }
+    color: $button-grey;
+  }
+}
